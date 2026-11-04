@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wu Qiongyi · Diagnostics Market Access</title>
+  <meta name="description" content="Wu Qiongyi — MSc Healthcare Innovation & Data Science at emlyon business school. Diagnostics market access and market intelligence, with a focus on China. Seeking an internship from April 2027." />
+  <meta property="og:title" content="Wu Qiongyi · Diagnostics Market Access & Market Intelligence" />
+  <meta property="og:description" content="Turning complex China healthcare policy into clear business insight. Internship from April 2027." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230d9488'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='30' fill='white'>WQ</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f8f6;
+      --bg-alt: #eef1ee;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #55606f;
+      --line: #dde3df;
+      --accent: #0d9488;
+      --accent-strong: #0f766e;
+      --accent-soft: #d5f0ec;
+      --warm: #c2410c;
+      --warm-soft: #fdeadf;
+      --shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.06);
+      --radius: 18px;
+      --max: 1080px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0b1220; --bg-alt: #0f1828; --surface: #131d2f; --text: #e7ecf3; --muted: #9aa7b8;
+        --line: #22304a; --accent: #2dd4bf; --accent-strong: #5eead4; --accent-soft: #0f2f33;
+        --warm: #fb923c; --warm-soft: #3a2316; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0b1220; --bg-alt: #0f1828; --surface: #131d2f; --text: #e7ecf3; --muted: #9aa7b8;
+      --line: #22304a; --accent: #2dd4bf; --accent-strong: #5eead4; --accent-soft: #0f2f33;
+      --warm: #fb923c; --warm-soft: #3a2316; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.65 "Inter", system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+    p { margin: 0; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Nav ---------- */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom: 1px solid transparent; transition: border-color .3s;
+    }
+    header.nav.scrolled { border-bottom-color: var(--line); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.15rem; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .brand-mark { width: 32px; height: 32px; border-radius: 9px; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: .8rem; letter-spacing: .02em; }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a { text-decoration: none; font-size: .9rem; color: var(--muted); padding: 8px 12px; border-radius: 999px; transition: color .2s, background .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--bg-alt); }
+    .icon-btn { width: 38px; height: 38px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; }
+    .icon-btn svg { width: 18px; height: 18px; }
+    .menu-btn { display: none; }
+    .nav-actions { display: flex; gap: 8px; align-items: center; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 96px 0 88px; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; inset: -20% -10% auto auto; width: 620px; height: 620px; border-radius: 50%;
+      background: radial-gradient(circle at center, color-mix(in srgb, var(--accent) 22%, transparent), transparent 65%);
+      filter: blur(10px); z-index: -1;
+    }
+    .hero::after {
+      content: ""; position: absolute; left: -160px; bottom: -220px; width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(circle at center, color-mix(in srgb, var(--warm) 14%, transparent), transparent 65%);
+      z-index: -1;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 10px; font-size: .85rem; font-weight: 500;
+      padding: 6px 14px 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
+    }
+    .pulse { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; position: relative; }
+    .pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.6); opacity: 0; } }
+    .hero h1 { font-size: clamp(2.6rem, 6.5vw, 4.6rem); margin: 28px 0 18px; }
+    .hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 400; }
+    .hero .lead { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--muted); max-width: 680px; }
+    .hero .lead strong { color: var(--text); font-weight: 600; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-weight: 500; font-size: .95rem;
+      text-decoration: none; border: 1px solid var(--line); background: var(--surface); transition: transform .15s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .btn svg { width: 17px; height: 17px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 48px; color: var(--muted); font-size: .9rem; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-meta svg { width: 16px; height: 16px; color: var(--accent); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+    .stat b { display: block; font-family: "Fraunces", serif; font-size: 2rem; font-weight: 600; line-height: 1.1; color: var(--accent); }
+    .stat span { font-size: .88rem; color: var(--muted); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 88px 0; }
+    section.alt { background: var(--bg-alt); }
+    .section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px; }
+    .section-head .num { font-family: "Fraunces", serif; color: var(--accent); font-size: 1rem; }
+    .section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+    .kicker { font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 600; color: var(--muted); }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; }
+    .about-grid p { font-size: 1.1rem; color: var(--muted); }
+    .about-grid p + p { margin-top: 18px; }
+    .about-grid p strong { color: var(--text); font-weight: 600; }
+    .focus-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+    .focus-card h3 { font-size: 1.2rem; margin-bottom: 16px; }
+    .focus-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .focus-list li { display: flex; gap: 12px; font-size: .95rem; }
+    .focus-list .dot { flex: none; width: 28px; height: 28px; border-radius: 8px; background: var(--accent-soft); color: var(--accent-strong); display: grid; place-items: center; }
+    .focus-list .dot svg { width: 15px; height: 15px; }
+
+    /* Projects */
+    .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .project {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
+      display: flex; flex-direction: column; gap: 14px; transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .project:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+    .project.featured { grid-column: span 3; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 36px; }
+    .project.featured h3 { font-size: 1.7rem; }
+    .project h3 { font-size: 1.3rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge { font-size: .75rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); }
+    .badge.warm { background: var(--warm-soft); color: var(--warm); }
+    .badge.plain { background: var(--bg-alt); color: var(--muted); }
+    .project .type { font-size: .88rem; color: var(--muted); }
+    .project ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .95rem; }
+    .project ul li + li { margin-top: 8px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+    .tag { font-size: .75rem; padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); }
+
+    /* Timeline */
+    .timeline { position: relative; display: grid; gap: 16px; }
+    .job {
+      display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 28px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--line);
+    }
+    .job .when { font-size: .88rem; color: var(--muted); }
+    .job .when b { display: block; color: var(--text); font-weight: 600; font-size: .95rem; margin-bottom: 4px; }
+    .job h3 { font-size: 1.25rem; }
+    .job .org { color: var(--accent-strong); font-weight: 500; margin: 4px 0 12px; font-size: .95rem; }
+    .job ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .96rem; }
+    .job ul li + li { margin-top: 8px; }
+
+    /* Education */
+    .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .edu { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; position: relative; overflow: hidden; }
+    .edu.current { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+    .edu.current::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--accent); }
+    .edu .years { font-size: .85rem; color: var(--muted); }
+    .edu h3 { font-size: 1.2rem; margin: 10px 0 8px; }
+    .edu .school { color: var(--accent-strong); font-weight: 500; font-size: .95rem; }
+    .edu .place { color: var(--muted); font-size: .88rem; margin-top: 4px; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .skill-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+    .skill-card h3 { font-size: 1.15rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .skill-card h3 .dot { width: 32px; height: 32px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-strong); display: grid; place-items: center; }
+    .skill-card h3 .dot svg { width: 17px; height: 17px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { font-size: .87rem; padding: 6px 12px; border-radius: 999px; background: var(--bg-alt); border: 1px solid var(--line); }
+
+    .extra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    .lang { display: grid; gap: 16px; }
+    .lang-row .top { display: flex; justify-content: space-between; font-size: .95rem; margin-bottom: 6px; }
+    .lang-row .top span:last-child { color: var(--muted); font-size: .87rem; }
+    .bar { height: 6px; border-radius: 999px; background: var(--bg-alt); overflow: hidden; }
+    .bar i { display: block; height: 100%; border-radius: inherit; background: var(--accent); width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+    .reveal.in .bar i { width: var(--w); }
+    .aff { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .aff li { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .aff li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .aff li span:last-child { color: var(--muted); font-size: .88rem; text-align: right; }
+
+    /* Contact */
+    .contact { text-align: center; padding: 110px 0; }
+    .contact h2 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); max-width: 760px; margin: 14px auto 18px; }
+    .contact p { color: var(--muted); max-width: 560px; margin: 0 auto; font-size: 1.08rem; }
+    .contact .cta-row { justify-content: center; }
+    .copy-toast { font-size: .85rem; color: var(--accent-strong); height: 20px; margin-top: 14px; opacity: 0; transition: opacity .2s; }
+    .copy-toast.show { opacity: 1; }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: .85rem; color: var(--muted); }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .pulse::after { animation: none; }
+      .bar i { transition: none; width: var(--w); }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .projects, .edu-grid { grid-template-columns: 1fr; }
+      .project.featured { grid-column: auto; grid-template-columns: 1fr; padding: 28px; }
+      .about-grid, .skills-grid, .extra-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .job { grid-template-columns: 1fr; gap: 12px; }
+    }
+    @media (max-width: 760px) {
+      .wrap { padding: 0 16px; }
+      .menu-btn { display: grid; }
+      .nav-links {
+        position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 16px 16px;
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px; border-radius: 10px; }
+      .hero { padding: 64px 0 64px; }
+      section { padding: 64px 0; }
+      .stat b { font-size: 1.6rem; }
+      .project, .job, .edu, .skill-card, .focus-card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand" aria-label="Back to top"><span class="brand-mark">WQ</span>Wu Qiongyi</a>
+      <nav class="nav-links" id="navLinks" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero" style="padding-bottom:72px">
+      <div class="wrap">
+        <div class="status-pill reveal"><span class="pulse"></span>Open to internships · from April 2027</div>
+        <h1 class="reveal">Diagnostics market access,<br /><span class="accent">seen through China's policy lens.</span></h1>
+        <p class="lead reveal">
+          I'm <strong>Wu Qiongyi</strong>, an MSc student in Healthcare Innovation &amp; Data Science at
+          <strong>emlyon business school</strong>. I study how pricing, reimbursement and procurement policy
+          shape diagnostic product adoption and commercial decisions.
+        </p>
+        <div class="cta-row reveal">
+          <a class="btn primary" href="mailto:qiongyi.wu@edu.em-lyon.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Get in touch
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/qiongyiwu" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="#projects">View projects →</a>
+        </div>
+        <div class="hero-meta reveal">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Lyon, France</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Mandarin · English · French (learning)</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/></svg>ISPOR Student Member</span>
+        </div>
+
+        <div class="stats">
+          <div class="stat reveal"><b>10+</b><span>years in policy, analytics &amp; business development</span></div>
+          <div class="stat reveal"><b>25</b><span>bank branches analysed for KPI reporting</span></div>
+          <div class="stat reveal"><b>3</b><span>active healthcare research projects</span></div>
+          <div class="stat reveal"><b>MBA</b><span>+ MSc in Healthcare Innovation &amp; Data Science</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="alt">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="num">01</span><h2>Profile</h2></div>
+        <div class="about-grid">
+          <div class="reveal">
+            <p>
+              MSc student in Healthcare Innovation &amp; Data Science at emlyon business school, with an MBA and
+              <strong>over ten years of experience</strong> in policy research, performance analysis and international business development.
+            </p>
+            <p>
+              My focus is <strong>diagnostics and market access in China</strong>: how pricing, reimbursement and procurement policy
+              shape product adoption and commercial decisions.
+            </p>
+            <p>
+              I'm seeking an internship in <strong>diagnostics market access, market intelligence or commercial analysis</strong>,
+              bringing native Chinese, professional English and a habit of turning complex policy into clear business insight.
+            </p>
+          </div>
+          <aside class="focus-card reveal">
+            <div class="kicker" style="margin-bottom:8px">What I bring</div>
+            <h3>Policy → insight → decision</h3>
+            <ul class="focus-list">
+              <li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg></span><span>China pricing, reimbursement &amp; procurement policy (DRG/DIP, VBP, lab test pricing)</span></li>
+              <li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span>Market &amp; competitor research, structured into decision-ready reports</span></li>
+              <li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20h5v-2a4 4 0 0 0-3-3.9M9 20H2v-2a4 4 0 0 1 4-4h3a4 4 0 0 1 4 4v2zM7.5 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM16 4.1a3 3 0 0 1 0 5.8"/></svg></span><span>Cross-border stakeholder coordination between China and Europe</span></li>
+              <li><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span><span>Data skills: Excel / Power Query, Python, KPI analysis</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="num">02</span><h2>Healthcare projects</h2></div>
+        <div class="projects">
+          <article class="project featured reveal">
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="badges"><span class="badge warm">Target: ISPOR Europe 2027</span><span class="badge">In progress</span></div>
+              <h3>Pricing of Multiplex Molecular Pathogen Tests in China</h3>
+              <p class="type">Research abstract in preparation</p>
+              <div class="tags"><span class="tag">Multiplex PCR</span><span class="tag">Lab test pricing</span><span class="tag">DRG / DIP</span><span class="tag">Reimbursement</span><span class="tag">Procurement</span></div>
+            </div>
+            <ul>
+              <li>Mapping how Chinese provinces implement the 2026 national laboratory test pricing guideline for multiplex PCR pathogen tests: price levels, multiplex discount tiers, reimbursement status and procurement.</li>
+              <li>Assessing implications for hospital adoption under DRG/DIP payment and for manufacturers' positioning of panel size and value evidence.</li>
+            </ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="badges"><span class="badge">In progress</span></div>
+            <h3>Rapid Molecular Diagnostics in China</h3>
+            <p class="type">Independent market research</p>
+            <ul>
+              <li>Investigating how regulatory pathways, clinical workflows, hospital economics and clinical evidence influence adoption, with a focus on product positioning and value communication.</li>
+            </ul>
+            <div class="tags"><span class="tag">Market access</span><span class="tag">Positioning</span><span class="tag">Value communication</span></div>
+          </article>
+
+          <article class="project reveal">
+            <div class="badges"><span class="badge plain">Early development</span></div>
+            <h3>China Diagnostics Policy Tracker</h3>
+            <p class="type">Self-directed Python project</p>
+            <ul>
+              <li>Building a tool that extracts key clauses, regions and dates from Chinese healthcare policy texts, links each policy to themed dashboards and keeps source evidence in a searchable knowledge base.</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Dashboards</span></div>
+          </article>
+
+          <article class="project reveal" style="background:transparent;border-style:dashed;justify-content:center">
+            <div class="kicker">Why it matters</div>
+            <h3 style="font-size:1.15rem">Policy is the product's first market.</h3>
+            <p class="type">In China, a diagnostic's price, reimbursement status and procurement route often decide adoption before clinical value is ever discussed. These projects make that visible.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience" class="alt">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="num">03</span><h2>Professional experience</h2></div>
+        <div class="timeline">
+          <article class="job reveal">
+            <div class="when"><b>11/2023 – 12/2025</b>Shenyang, China</div>
+            <div>
+              <h3>Research &amp; Policy Analyst</h3>
+              <div class="org">National Research Institute for Digital Technology Development</div>
+              <ul>
+                <li>Produced policy and industry research on the digital economy, green transition and sustainable industry, turning complex policy developments into structured reports and decision-making insights.</li>
+                <li>Supported field research in Beijing and Shanghai with government bodies, industry associations, companies and universities to inform analysis and cross-sector collaboration.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job reveal">
+            <div class="when"><b>12/2021 – 10/2023</b>Shenyang, China</div>
+            <div>
+              <h3>Overseas Business Development</h3>
+              <div class="org">EC Innovations</div>
+              <ul>
+                <li>Researched overseas prospects and market opportunities for language and localisation services to support international client outreach.</li>
+                <li>Coordinated client requirements with internal delivery teams, aligning commercial expectations, localisation needs and project execution.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job reveal">
+            <div class="when"><b>06/2021 – 10/2021</b>Shenyang, China</div>
+            <div>
+              <h3>Overseas Business Development</h3>
+              <div class="org">Shenyang Zhongtonghe Trading</div>
+              <ul>
+                <li>Helped set up a medical-equipment trading venture as part of a three-person team, researching international suppliers and customers and supporting cross-border communication.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job reveal">
+            <div class="when"><b>08/2013 – 03/2021</b>Shenyang, China</div>
+            <div>
+              <h3>Performance &amp; Data Analytics / Personal Banking Operations</h3>
+              <div class="org">China Construction Bank</div>
+              <ul>
+                <li>Analysed performance indicators across 25 branches and four departments, supporting KPI monitoring, management reporting and follow-up actions.</li>
+                <li>Interpreted internal and regulatory policies and translated them into operational guidance, coordinating implementation across branch teams and functional departments.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <section id="education">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="num">04</span><h2>Education</h2></div>
+        <div class="edu-grid">
+          <article class="edu current reveal">
+            <div class="years">10/2026 – Present</div>
+            <h3>MSc in Healthcare Innovation &amp; Data Science</h3>
+            <div class="school">emlyon business school</div>
+            <div class="place">Lyon, France</div>
+          </article>
+          <article class="edu reveal">
+            <div class="years">2021 – 2025</div>
+            <h3>Master of Business Administration (MBA)</h3>
+            <div class="school">Northeastern University</div>
+            <div class="place">Shenyang, China</div>
+          </article>
+          <article class="edu reveal">
+            <div class="years">2009 – 2013</div>
+            <h3>BA in English (International Business)</h3>
+            <div class="school">Dongbei University of Finance &amp; Economics</div>
+            <div class="place">Dalian, China</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" class="alt">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="num">05</span><h2>Skills &amp; more</h2></div>
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <h3><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-4.5-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.5-8 11-8 11z"/></svg></span>Healthcare policy &amp; market access</h3>
+            <div class="chips"><span class="chip">China healthcare policy</span><span class="chip">DRG / DIP payment</span><span class="chip">Volume-based procurement</span><span class="chip">Laboratory test pricing</span><span class="chip">Health economics (in progress via ISPOR)</span></div>
+          </div>
+          <div class="skill-card reveal">
+            <h3><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>Research &amp; analysis</h3>
+            <div class="chips"><span class="chip">Market research</span><span class="chip">Competitor research</span><span class="chip">Policy analysis</span><span class="chip">KPI analysis &amp; reporting</span></div>
+          </div>
+          <div class="skill-card reveal">
+            <h3><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>Business</h3>
+            <div class="chips"><span class="chip">Stakeholder coordination</span><span class="chip">International business development</span><span class="chip">STP</span><span class="chip">7Ps</span></div>
+          </div>
+          <div class="skill-card reveal">
+            <h3><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>Tools</h3>
+            <div class="chips"><span class="chip">Excel · pivot tables</span><span class="chip">Lookup functions</span><span class="chip">Power Query</span><span class="chip">PowerPoint</span><span class="chip">Python (basic)</span></div>
+          </div>
+        </div>
+
+        <div class="extra-grid">
+          <div class="skill-card reveal">
+            <h3>Languages</h3>
+            <div class="lang">
+              <div class="lang-row"><div class="top"><span>Mandarin Chinese</span><span>Native</span></div><div class="bar"><i style="--w:100%"></i></div></div>
+              <div class="lang-row"><div class="top"><span>English</span><span>Professional working</span></div><div class="bar"><i style="--w:85%"></i></div></div>
+              <div class="lang-row"><div class="top"><span>French</span><span>Elementary (A1), learning</span></div><div class="bar"><i style="--w:18%"></i></div></div>
+            </div>
+          </div>
+          <div class="skill-card reveal">
+            <h3>Affiliations</h3>
+            <ul class="aff">
+              <li><span><b>ISPOR</b> — Student Member</span><span>2026 – present</span></li>
+              <li><span><b>emlyon Club Santé</b> — Member</span><span>Healthcare club</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <div class="kicker reveal">Contact</div>
+        <h2 class="reveal">Let's talk diagnostics, market access and China.</h2>
+        <p class="reveal">Available for an internship in market access, market intelligence or commercial analysis from April 2027.</p>
+        <div class="cta-row reveal" style="margin-top:32px">
+          <a class="btn primary" href="mailto:qiongyi.wu@edu.em-lyon.com">qiongyi.wu@edu.em-lyon.com</a>
+          <button class="btn" id="copyBtn" type="button" style="cursor:pointer;font-family:inherit;color:inherit">Copy email</button>
+          <a class="btn" href="tel:+33670984375">+33 6 70 98 43 75</a>
+          <a class="btn" href="https://www.linkedin.com/in/qiongyiwu" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+        <div class="copy-toast" id="toast" role="status">Email copied to clipboard</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="year">2026</span> Wu Qiongyi</span>
+      <span>Lyon, France · Built for GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var themeBtn = document.getElementById('themeBtn');
+      var themeIcon = document.getElementById('themeIcon');
+      var moon = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+      var sun = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+
+      function isDark() {
+        var t = root.getAttribute('data-theme');
+        if (t) return t === 'dark';
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      function syncIcon() { themeIcon.innerHTML = isDark() ? sun : moon; }
+
+      try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+      syncIcon();
+      themeBtn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        syncIcon();
+      });
+
+      // Mobile menu
+      var menuBtn = document.getElementById('menuBtn');
+      var navLinks = document.getElementById('navLinks');
+      menuBtn.addEventListener('click', function () {
+        var open = navLinks.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', open);
+      });
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); });
+      });
+
+      // Nav border on scroll
+      var nav = document.getElementById('nav');
+      function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 8); }
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+      // Reveal on scroll
+      var items = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        items.forEach(function (el) { io.observe(el); });
+      } else {
+        items.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      // Active nav link
+      var sections = document.querySelectorAll('main section[id]');
+      var links = {};
+      navLinks.querySelectorAll('a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+      if ('IntersectionObserver' in window) {
+        var so = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              Object.values(links).forEach(function (l) { l.classList.remove('active'); });
+              if (links[en.target.id]) links[en.target.id].classList.add('active');
+            }
+          });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        sections.forEach(function (s) { so.observe(s); });
+      }
+
+      // Copy email
+      var copyBtn = document.getElementById('copyBtn');
+      var toast = document.getElementById('toast');
+      copyBtn.addEventListener('click', function () {
+        var email = 'qiongyi.wu@edu.em-lyon.com';
+        var done = function () { toast.classList.add('show'); setTimeout(function () { toast.classList.remove('show'); }, 1800); };
+        if (navigator.clipboard) navigator.clipboard.writeText(email).then(done, function () {});
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
